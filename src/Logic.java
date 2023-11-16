@@ -1,21 +1,48 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Logic {
+    static Map<Integer,String> tensMap = new HashMap<>(6);
+    static Map<Integer,String> doublePlusDigitMap = new HashMap<>();
+
+    static {
+        tensMap.put(0, "ten");
+        tensMap.put(1, "eleven");
+        tensMap.put(2, "twelve");
+        tensMap.put(3, "thirteen");
+        tensMap.put(4, "fourteen");
+        tensMap.put(5, "fifteen");
+
+        doublePlusDigitMap.put(2, "twenty");
+        doublePlusDigitMap.put(3, "thirty");
+        doublePlusDigitMap.put(4, "forty");
+        doublePlusDigitMap.put(5, "fifty");
+        doublePlusDigitMap.put(6, "sixty");
+        doublePlusDigitMap.put(7, "seventy");
+        doublePlusDigitMap.put(8, "eighty");
+        doublePlusDigitMap.put(9, "ninety");
+    }
 
     ArrayList<String> resultingString = new ArrayList<>();
     ArrayList<Integer> numbersByDigit = new ArrayList<>();
 
     public ArrayList<String> mainFunction(int number) {
-        parcer(number);
-        for (int i = 0; i < numbersByDigit.size(); i++) {
+        parcingByNumber(number);
+        while (numbersByDigit.size() != 0) {
             if (numbersByDigit.size() > 2) digitNumber(numbersByDigit);
-            else resultingString.add(ones(numbersByDigit));
+            else if (numbersByDigit.size() == 2) {
+                if (numbersByDigit.get(0) == 1) {
+                    resultingString.add(tens(numbersByDigit));
+                    numbersByDigit.remove(0);}
+                else resultingString.add(tens(numbersByDigit));
+            }
             numbersByDigit.remove(0);
         }
         return resultingString;
     }
 
-    public void parcer(int number) {
+    public void parcingByNumber(int number) {
         ArrayList<Integer> rotateString = new ArrayList<>();
         while (number / 10 > 0) {
             rotateString.add(number%10);
@@ -26,8 +53,7 @@ public class Logic {
     }
 
     // from one till nine
-    public String ones(ArrayList<Integer> value) {
-        int num = value.get(0);
+    public String ones(int num) {
         String res = "";
         if (num > 4) {
             if (num > 7) {
@@ -53,9 +79,17 @@ public class Logic {
         return res;
     }
 
-    // fifteen, sixteen, twenty, fourty etc.
+    // fifteen, sixteen, twenty, forty etc.
     public String tens(ArrayList<Integer> tens) {
-        return "tens";
+        String res = "";
+        if (tens.get(0) == 1) {
+            if (tens.get(1) < 6) res += tensMap.get(tens.get(1));
+            else res += ones(tens.get(1)) + "teen";
+        }
+        else if (tens.get(0) > 1) {
+            res += doublePlusDigitMap.get(tens.get(0)) + " " + ones(tens.get(1));
+        }
+        return res;
     }
 
     // hundred, thousand, million etc.
