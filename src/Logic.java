@@ -30,7 +30,7 @@ public class Logic {
     public ArrayList<String> mainFunction(int number) {
         parcingByNumber(number);
         while (numbersByDigit.size() != 0) {
-            if (numbersByDigit.size() > 2) digitNumber(numbersByDigit);
+            if (numbersByDigit.size() > 2) resultingString.add(digitNumber(numbersByDigit));
             else if (numbersByDigit.size() == 2) {
                 if (numbersByDigit.get(0) == 1) {
                     resultingString.add(tens(numbersByDigit));
@@ -94,8 +94,12 @@ public class Logic {
 
     // hundred, thousand, million etc.
     public String digitNumber(ArrayList<Integer> number) {
-        if (number.size() == 3) return " hundred";
-        if (number.size() == 4) return " thousand";
-        else return "";
+        String res = "";
+        if (number.size() == 3) res += ones(number.get(0)) + " hundred ";
+        if (number.size() == 4) res += ones(number.get(0)) + " thousand ";
+        if (number.size() == 5) {
+            return "";
+        }
+        return res;
     }
 }
