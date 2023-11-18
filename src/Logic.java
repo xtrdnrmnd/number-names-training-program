@@ -24,18 +24,21 @@ public class Logic {
         doublePlusDigitMap.put(9, "ninety");
     }
 
-    ArrayList<String> resultingString = new ArrayList<>();
+    StringBuffer resultingString = new StringBuffer();
     ArrayList<Integer> numbersByDigit = new ArrayList<>();
 
-    public ArrayList<String> mainFunction(int number) {
+    public StringBuffer mainFunction(int number) {
         parcingByNumber(number);
         while (numbersByDigit.size() != 0) {
-            if (numbersByDigit.size() > 2) resultingString.add(digitNumber(numbersByDigit));
-            else if (numbersByDigit.size() == 2) {
+            if (numbersByDigit.size() > 2) {
+                resultingString.append(digitNumber(numbersByDigit));
+                if (numbersByDigit.size() == 5 || numbersByDigit.size() == 8) numbersByDigit.remove(0);
+            }
+            else if (numbersByDigit.size() == 2 ) {
                 if (numbersByDigit.get(0) == 1) {
-                    resultingString.add(tens(numbersByDigit));
+                    resultingString.append(tens(numbersByDigit));
                     numbersByDigit.remove(0);}
-                else resultingString.add(tens(numbersByDigit));
+                else resultingString.append(tens(numbersByDigit) /*+ ones(numbersByDigit.get(1))*/);
             }
             numbersByDigit.remove(0);
         }
@@ -97,9 +100,10 @@ public class Logic {
         String res = "";
         if (number.size() == 3) res += ones(number.get(0)) + " hundred ";
         if (number.size() == 4) res += ones(number.get(0)) + " thousand ";
-        if (number.size() == 5) {
-            return "";
-        }
+        if (number.size() == 5) res += tens(number) + " thousand ";
+        if (number.size() == 6) res += ones(number.get(0)) + " hundred ";
+        if (number.size() == 7) res += ones(number.get(0)) + " million ";
+        if (number.size() == 8) res += tens(number) + " million ";
         return res;
     }
 }

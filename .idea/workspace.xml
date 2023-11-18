@@ -83,12 +83,20 @@
       <option name="project" value="LOCAL" />
       <updated>1700126129868</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="triple+ digit implementation">
+      <created>1700241712403</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1700241712403</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added tranformation into words for numbers 1 to 9 and main program logic" />
     <MESSAGE value="added double digit implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="added double digit implementation" />
+    <MESSAGE value="triple+ digit implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="triple+ digit implementation" />
   </component>
 </project>
